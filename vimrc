@@ -1,19 +1,13 @@
 set nocompatible
 
+call pathogen#runtime_append_all_bundles()
+call pathogen#helptags()
+
 if has('win32')
     source $VIMRUNTIME/vimrc_example.vim
     source $VIMRUNTIME/mswin.vim
     behave mswin
 endif
-
-" make snippets work on win7
-" actually this fails. Workaround - append this line to
-" vim-snipmate/plugin/snipmate.vim
-"if has('win32')
-"    source $VIMRUNTIME/bundle/vim-snipmate/after/plugin/snipMate.vim
-"endif
-
-call pathogen#infect()
 
 set number
 set autoread " auto read when file is changed from outside
@@ -89,10 +83,8 @@ if has('gui')
     endif
 endif
 
-" CtrlP settings
-let g:ctrlp_extensions = ['tag']
 
-" Set the status line the way i like it
+" Set the status line
 set stl=%f\ %m\ %r%{fugitive#statusline()}\ Line:%l/%L[%p%%]\ Col:%v\ Buf:#%n\ [%b][0x%B]
 " tell VIM to always put a status line in, even if there is only one window
 set laststatus=2
@@ -106,4 +98,21 @@ nmap <silent> ,n :nohls<CR>
 " Edit the vimrc file
 nmap <silent> ,ev :e $MYVIMRC<CR>
 nmap <silent> ,sv :so $MYVIMRC<CR>
+
+"-----------------------------------------------------------------------------
+" XPTemplate settings
+"-----------------------------------------------------------------------------
+let g:xptemplate_brace_complete = ''
+
+"-----------------------------------------------------------------------------
+" CtrlP settings
+"-----------------------------------------------------------------------------
+let g:ctrlp_extensions = ['tag']
+
+" make snippets work on win7
+" actually this fails. Workaround - append this line to
+" vim-snipmate/plugin/snipmate.vim
+"if has('win32')
+"    source $VIMRUNTIME/bundle/vim-snipmate/after/plugin/snipMate.vim
+"endif
 
