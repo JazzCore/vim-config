@@ -1,0 +1,24 @@
+[submodule "bundle/Decho"]
+	path = bundle/Decho
+	url = https://github.com/vim-scripts/Decho.git
+[submodule "bundle/bufexplorer"]
+	path = bundle/bufexplorer
+	url = https://github.com/vim-scripts/bufexplorer.zip.git
+[submodule "bundle/SuperTab"]
+	path = bundle/SuperTab
+	url = https://github.com/ervandew/supertab.git
+[submodule "bundle/fugitive"]
+	path = bundle/fugitive
+	url = https://github.com/tpope/vim-fugitive.git
+[submodule "bundle/ack"]
+	path = bundle/ack
+	url = https://github.com/mileszs/ack.vim.git
+[submodule "bundle/CtrlP"]
+	path = bundle/CtrlP
+	url = https://github.com/JazzCore/ctrlp.vim.git
+[submodule "bundle/XPTemplate"]
+	path = bundle/XPTemplate
+	url = https://github.com/drmingdrmer/xptemplate.git
+[submodule "bundle/mustang-vim"]
+	path = bundle/mustang-vim
+	url = https://github.com/JazzCore/mustang-vim.git
