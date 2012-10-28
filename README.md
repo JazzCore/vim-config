@@ -15,7 +15,7 @@ On Windows ( execute in $VIMRUNTIME dir ):
 git clone https://github.com/JazzCore/vim-config.git
 mklink autoload\pathogen.vim ..\vim-config\autoload\pathogen.vim
 mklink /D bundle vim-config\bundle
-mklink ..\_vimrc vim73\vim-config\vimrc
+mklink /H ..\_vimrc vim-config\vimrc
 cd vim-config
 git submodule init
 git submodule update
