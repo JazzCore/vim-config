@@ -1,7 +1,50 @@
 set nocompatible
 
-call pathogen#runtime_append_all_bundles()
-call pathogen#helptags()
+filetype off
+
+set rtp+=~/.vim/bundle/vundle/
+call vundle#rc()
+"set rtp+=~/.vim/bundle/powerline/powerline/bindings/vim
+
+Bundle 'JazzCore/vundle'
+Bundle 'JazzCore/ultisnips', 'neocompl_snippets'
+Bundle 'JazzCore/ctrlp-cmatcher'
+Bundle 'tpope/vim-fugitive'
+Bundle 'tpope/vim-surround'
+Bundle 'tpope/vim-endwise'
+Bundle 'tpope/vim-markdown'
+Bundle 'Shougo/neocomplcache'
+Bundle 'Shougo/vimproc'
+"Bundle 'Shougo/neosnippet'
+Bundle 'scrooloose/nerdcommenter'
+Bundle 'scrooloose/syntastic'
+Bundle 'Lokaltog/vim-easymotion'
+"Bundle 'Lokaltog/powerline'
+Bundle 'majutsushi/tagbar'
+Bundle 'kien/ctrlp.vim'
+Bundle 'mileszs/ack.vim'
+Bundle 'Raimondi/delimitMate'
+Bundle 'davidhalter/jedi-vim'
+Bundle 'croaker/mustang-vim'
+Bundle 'nvie/vim-flake8'
+Bundle 'alfredodeza/pytest.vim'
+Bundle 'mbbill/undotree'
+Bundle 'matthias-guenther/hammer.vim'
+Bundle 'Spaceghost/vim-matchit'
+Bundle 'gregsexton/gitv'
+Bundle 'xolox/vim-session'
+Bundle "myusuf3/numbers.vim"
+Bundle "klen/python-mode"
+Bundle 'Decho'
+Bundle 'TaskList.vim'
+Bundle 'bufexplorer.zip'
+" Check it
+Bundle 'michaeljsmith/vim-indent-object'
+Bundle 'sjl/clam.vim'
+Bundle 'xuhdev/SingleCompile'
+"Bundle 'YankRing.vim'
+Bundle 'suan/vim-instant-markdown'
+"Bundle 'Valloric/YouCompleteMe'
 
 if has('win32')
     source $VIMRUNTIME/vimrc_example.vim
@@ -34,6 +77,11 @@ set backspace=indent,eol,start " allow backspacing over everything in insert mod
 " allowed to go in there (ie. the "must save first" error doesn't come up)
 set hidden
 
+" This makes j and k work on "screen lines" instead of on "file lines"; now, when
+" we have a long line that wraps to multiple screen lines, j and k behave as we
+" expect them to.
+nnoremap j gj
+nnoremap k gk
 
 " disable sound on errors
 set noerrorbells
@@ -61,10 +109,21 @@ set backspace=indent,eol,start
 set showmatch " show matched braces 
 
 set history=1000         " remember more commands and search history
-set undolevels=2048 " use many muchos levels of undo
+
+set undofile
+set undolevels=2000
+set undoreload=10000
+
 set wildignore=*.swp,*.bak,*.pyc,*.class
 
 set pastetoggle=<F2>
+
+" misc settings
+set fileformat=unix " file mode is unix
+set fileformats=unix,dos,mac " detects unix, dos, mac file formats in that order
+
+" Right-click on selection should bring up a menu
+set mousemodel=popup_setpos
 
 nnoremap ; :
 
@@ -79,10 +138,20 @@ if has('gui')
     if has('win32')
         set guifont=Consolas:h10:cRUSSIAN
     else
-        set guifont=Terminus\ 10
+        set guifont=Droid\ Sans\ Mono\ for\ Powerline\ 9
     endif
 endif
 
+" Look for tag def in a "tags" file in the dir of the current file, then for
+" that same file in every folder above the folder of the current file, until the
+" root.
+set tags=./tags;/
+
+" Using '<' and '>' in visual mode to shift code by a tab-width left/right by
+" default exits visual mode. With this mapping we remain in visual mode after
+" such an operation.
+vnoremap < <gv
+vnoremap > >gv
 
 " Set the status line
 set stl=%f\ %m\ %r%{fugitive#statusline()}\ Line:%l/%L[%p%%]\ Col:%v\ Buf:#%n\ [%b][0x%B]
@@ -92,6 +161,13 @@ set laststatus=2
 " System default for mappings is now the "," character
 let mapleader = ","
 
+set foldlevel=100 " Don't autofold anything (but I can still fold manually)
+set foldopen=block,hor,mark,percent,quickfix,tag " what movements open folds 
+
+" Change Working Directory to that of the current file
+cmap cwd lcd %:p:h
+cmap cd. lcd %:p:h
+
 " Turn off that stupid highlight search
 nmap <silent> ,n :nohls<CR>
 
@@ -99,20 +175,88 @@ nmap <silent> ,n :nohls<CR>
 nmap <silent> ,ev :e $MYVIMRC<CR>
 nmap <silent> ,sv :so $MYVIMRC<CR>
 
-"-----------------------------------------------------------------------------
-" XPTemplate settings
-"-----------------------------------------------------------------------------
-let g:xptemplate_brace_complete = ''
+" Map <Leader>ff to display all lines with keyword under cursor
+" and ask which one to jump to
+nmap <Leader>ff [I:let nr = input("Which one: ")<Bar>exe "normal " . nr ."[\t"<CR>
 
-"-----------------------------------------------------------------------------
-" CtrlP settings
-"-----------------------------------------------------------------------------
+" ,f for global git serach for word under the cursor (with highlight)
+"nmap <leader>f :let @/="\\<<C-R><C-W>\\>"<CR>:set hls<CR>:silent Ggrep -w "<C-R><C-W>"<CR>:ccl<CR>:cw<CR><CR>
+
+" Filetype-specific settings
+autocmd FileType python setlocal colorcolumn=80
+
+" ==================== CtrlP ==================== 
 let g:ctrlp_extensions = ['tag']
 
-" make snippets work on win7
-" actually this fails. Workaround - append this line to
-" vim-snipmate/plugin/snipmate.vim
-"if has('win32')
-"    source $VIMRUNTIME/bundle/vim-snipmate/after/plugin/snipMate.vim
-"endif
+" Execute the tests
+nmap <silent><Leader>tf <Esc>:Pytest file<CR>
+nmap <silent><Leader>tc <Esc>:Pytest class<CR>
+nmap <silent><Leader>tm <Esc>:Pytest method<CR>
+" cycle through test errors
+nmap <silent><Leader>tn <Esc>:Pytest next<CR>
+nmap <silent><Leader>tp <Esc>:Pytest previous<CR>
+nmap <silent><Leader>te <Esc>:Pytest error<CR>
 
+" ==================== NeoComplCache ====================
+let g:neocomplcache_enable_at_startup = 1
+let g:neocomplcache_enable_fuzzy_completion = 1
+let g:neocomplcache_enable_auto_select = 0
+
+if !exists('g:neocomplcache_omni_functions')
+    let g:neocomplcache_omni_functions = {}
+endif
+let g:neocomplcache_omni_functions['python'] = 'jedi#complete'
+
+let g:neocomplcache_force_overwrite_completefunc = 1
+
+if !exists('g:neocomplcache_force_omni_patterns')
+  let g:neocomplcache_force_omni_patterns = {}
+endif
+let g:neocomplcache_force_omni_patterns['python'] = '[^. \t]\.\w*'
+
+function! s:my_cr_function()
+    "return neocomplcache#smart_close_popup() . "\<CR>"
+    " For no inserting <CR> key.
+    return pumvisible() ? neocomplcache#close_popup() : "\<CR>"
+endfunction
+
+inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
+
+" ==================== Jedi ====================
+let g:jedi#auto_initialization = 1
+let g:jedi#popup_on_dot = 0
+let g:jedi#show_function_definition = 0
+
+" ==================== TagBar ====================
+" toggle Tagbar display
+map <F4> :TagbarToggle<CR>
+" autofocus on Tagbar open
+let g:tagbar_autofocus = 1
+
+" ==================== TaskList ====================
+" show pending tasks list
+map <F3> :TaskList<CR>
+
+" ==================== Fugitive ====================
+nnoremap <silent> <leader>gs :Gstatus<CR>
+nnoremap <silent> <leader>gd :Gdiff<CR>
+nnoremap <silent> <leader>gc :Gcommit<CR>
+nnoremap <silent> <leader>gb :Gblame<CR>
+nnoremap <silent> <leader>gl :Glog<CR>
+nnoremap <silent> <leader>gp :Git push<CR>
+
+" ==================== vim-session ====================
+let g:session_autosave = 1
+let g:session_autoload = 1
+
+" ==================== python-mode ====================
+let g:pymode_doc = 0
+let g:pymode_run = 0
+let g:pymode_lint = 0
+let g:pymode_rope = 0
+let g:pymode_folding = 0
+let g:pymode_options = 0
+
+" ==================== Ack.vim ====================
+" Make ack.vim use Ag (silver searcher ) instead of ack
+let g:ackprg = 'ag --nogroup --nocolor --column'
