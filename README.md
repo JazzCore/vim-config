@@ -1,24 +1,14 @@
-Based on
-http://vimcasts.org/episodes/synchronizing-plugins-with-git-submodules-and-pathogen/
-
 ```bash
+cd ~
 git clone https://github.com/JazzCore/vim-config.git ~/.vim/
 ln -s ~/.vim/vimrc ~/.vimrc
-ln -s ~/.vim/gvimrc ~/.gvimrc
-cd ~/.vim/
-git submodule init
-git submodule update
 ```
 
-On Windows ( execute in $VIMRUNTIME dir ):
+On Windows ( execute in %HOME% dir ):
 ```bash
 git clone https://github.com/JazzCore/vim-config.git
-mklink autoload\pathogen.vim ..\vim-config\autoload\pathogen.vim
 mklink /D bundle vim-config\bundle
 mklink /H ..\_vimrc vim-config\vimrc
-cd vim-config
-git submodule init
-git submodule update
 ```
 
 ## Update all bundled modules
