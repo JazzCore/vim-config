@@ -9,6 +9,7 @@ call vundle#rc()
 Bundle 'JazzCore/vundle'
 Bundle 'JazzCore/ultisnips', 'neocompl_snippets'
 Bundle 'JazzCore/ctrlp-cmatcher'
+Bundle 'JazzCore/ultisnips-snippets'
 Bundle 'tpope/vim-fugitive'
 Bundle 'tpope/vim-surround'
 Bundle 'tpope/vim-endwise'
@@ -260,3 +261,7 @@ let g:pymode_options = 0
 " ==================== Ack.vim ====================
 " Make ack.vim use Ag (silver searcher ) instead of ack
 let g:ackprg = 'ag --nogroup --nocolor --column'
+
+" ==================== UltiSnips ====================
+let g:ultisnips_python_style = "sphinx"
+let g:UltiSnipsSnippetDirectories = ["UltiSnips", "ultisnips-snippets"]
