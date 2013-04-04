@@ -189,7 +189,8 @@ nmap <Leader>ff [I:let nr = input("Which one: ")<Bar>exe "normal " . nr ."[\t"<C
 autocmd FileType python setlocal colorcolumn=80
 
 " ==================== CtrlP ==================== 
-let g:ctrlp_extensions = ['tag']
+" funty adds functions definitions mode to CtrlP
+let g:ctrlp_extensions = ['tag', 'funky']
 
 " Execute the tests
 nmap <silent><Leader>tf <Esc>:Pytest file<CR>
