@@ -5,6 +5,8 @@ filetype off
 set rtp+=~/.vim/bundle/vundle/
 call vundle#rc()
 "set rtp+=~/.vim/bundle/powerline/powerline/bindings/vim
+"set rtp+=D:/src/powerline/powerline/bindings/vim
+set rtp+=~/.vim/ycmtest/
 
 Bundle 'JazzCore/vundle'
 Bundle 'JazzCore/ctrlp-cmatcher'
@@ -49,6 +51,9 @@ Bundle 'ivanov/vim-ipython'
 Bundle 'scrooloose/nerdtree'
 "Bundle 'sgerrand/Conque-Shell'
 
+" Disable menu translation
+set langmenu=none
+
 if has('win32')
     source $VIMRUNTIME/vimrc_example.vim
     source $VIMRUNTIME/mswin.vim
@@ -57,6 +62,11 @@ endif
 
 set number
 set autoread " auto read when file is changed from outside
+
+" set default encoding to UTF-8. Needed for powerline
+" this options breaks menu encoding, so we disabling menu
+" translation
+set encoding=utf-8
 
 set fencs=utf-8,cp1251,koi8-r,cp866 " encodings by default
 
@@ -138,8 +148,12 @@ if has('gui')
     set guioptions-=e
     " disable icons
     set guioptions-=T
+    " disable menu
+    set guioptions-=m
     if has('win32')
-        set guifont=Consolas:h10:cRUSSIAN
+        " This a patched Consolas for Powerline, from
+        " https://github.com/nicolalamacchia/powerline-consolas
+        set guifont=Consolas:h10
     else
         set guifont=Droid\ Sans\ Mono\ for\ Powerline\ 9
     endif
@@ -251,3 +265,10 @@ let g:ycm_general_completers = ['ultisnips_completer']
 
 " ==================== NERDTree ====================
 map <F2> :NERDTreeToggle<CR>
+
+" ==================== Powerline ====================
+"let g:Powerline_symbols = 'unicode'
+let g:Powerline_symbols="fancy"
+" Temporarily needed for correct powerline work on Windows with
+" latest Vim versions
+let g:powerline_debugging_pyeval=1
