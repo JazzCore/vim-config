@@ -60,6 +60,11 @@ if has('win32')
     behave mswin
 endif
 
+" Set directories for temp and swap files.
+" Make them manually
+set backupdir=~/.vim/backup//
+set directory=~/.vim/swap//
+
 set number
 set autoread " auto read when file is changed from outside
 
