@@ -15,8 +15,9 @@ Bundle 'tpope/vim-fugitive'
 Bundle 'tpope/vim-surround'
 Bundle 'tpope/vim-endwise'
 Bundle 'tpope/vim-markdown'
-Bundle 'Shougo/neocomplcache'
-Bundle 'Shougo/vimproc'
+Bundle 'Valloric/YouCompleteMe'
+"Bundle 'Shougo/neocomplcache'
+"Bundle 'Shougo/vimproc'
 "Bundle 'Shougo/neosnippet'
 Bundle 'scrooloose/nerdcommenter'
 Bundle 'scrooloose/syntastic'
@@ -222,7 +223,7 @@ function! s:my_cr_function()
     return pumvisible() ? neocomplcache#close_popup() : "\<CR>"
 endfunction
 
-inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
+"inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
 
 " ==================== Jedi ====================
 let g:jedi#auto_initialization = 1
@@ -266,3 +267,14 @@ let g:ackprg = 'ag --nogroup --nocolor --column'
 " ==================== UltiSnips ====================
 let g:ultisnips_python_style = "sphinx"
 let g:UltiSnipsSnippetDirectories = ["UltiSnips", "ultisnips-snippets"]
+let g:UltiSnipsDontReverseSearchPath=1
+
+" ==================== YouCompleteMe ====================
+" Disable completion previews with function prototypes, etc.
+"set completeopt=menu
+"let g:ycm_add_preview_to_completeopt = 0
+let g:ycm_autoclose_preview_window_after_completion = 1
+let g:ycm_complete_in_comments_and_strings = 1
+let g:ycm_collect_identifiers_from_comments_and_strings = 1
+let g:ycm_general_completers = ['ultisnips_completer']
+
