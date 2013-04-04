@@ -7,9 +7,10 @@ call vundle#rc()
 "set rtp+=~/.vim/bundle/powerline/powerline/bindings/vim
 
 Bundle 'JazzCore/vundle'
-Bundle 'JazzCore/ultisnips', 'neocompl_snippets'
 Bundle 'JazzCore/ctrlp-cmatcher'
 Bundle 'JazzCore/ultisnips-snippets'
+"Bundle 'JazzCore/neocomplcache-ultisnips'
+Bundle 'SirVer/ultisnips'
 Bundle 'tpope/vim-fugitive'
 Bundle 'tpope/vim-surround'
 Bundle 'tpope/vim-endwise'
