@@ -9,16 +9,12 @@ call vundle#rc()
 Bundle 'JazzCore/vundle'
 Bundle 'JazzCore/ctrlp-cmatcher'
 Bundle 'JazzCore/ultisnips-snippets'
-"Bundle 'JazzCore/neocomplcache-ultisnips'
 Bundle 'SirVer/ultisnips'
 Bundle 'tpope/vim-fugitive'
 Bundle 'tpope/vim-surround'
 Bundle 'tpope/vim-endwise'
 Bundle 'tpope/vim-markdown'
 Bundle 'Valloric/YouCompleteMe'
-"Bundle 'Shougo/neocomplcache'
-"Bundle 'Shougo/vimproc'
-"Bundle 'Shougo/neosnippet'
 Bundle 'scrooloose/nerdcommenter'
 Bundle 'scrooloose/syntastic'
 Bundle 'Lokaltog/vim-easymotion'
@@ -199,31 +195,6 @@ nmap <silent><Leader>tm <Esc>:Pytest method<CR>
 nmap <silent><Leader>tn <Esc>:Pytest next<CR>
 nmap <silent><Leader>tp <Esc>:Pytest previous<CR>
 nmap <silent><Leader>te <Esc>:Pytest error<CR>
-
-" ==================== NeoComplCache ====================
-let g:neocomplcache_enable_at_startup = 1
-let g:neocomplcache_enable_fuzzy_completion = 1
-let g:neocomplcache_enable_auto_select = 0
-
-if !exists('g:neocomplcache_omni_functions')
-    let g:neocomplcache_omni_functions = {}
-endif
-let g:neocomplcache_omni_functions['python'] = 'jedi#complete'
-
-let g:neocomplcache_force_overwrite_completefunc = 1
-
-if !exists('g:neocomplcache_force_omni_patterns')
-  let g:neocomplcache_force_omni_patterns = {}
-endif
-let g:neocomplcache_force_omni_patterns['python'] = '[^. \t]\.\w*'
-
-function! s:my_cr_function()
-    "return neocomplcache#smart_close_popup() . "\<CR>"
-    " For no inserting <CR> key.
-    return pumvisible() ? neocomplcache#close_popup() : "\<CR>"
-endfunction
-
-"inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
 
 " ==================== Jedi ====================
 let g:jedi#auto_initialization = 1
