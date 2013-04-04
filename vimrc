@@ -55,7 +55,7 @@ Bundle 'scrooloose/nerdtree'
 set langmenu=none
 
 if has('win32')
-    source $VIMRUNTIME/vimrc_example.vim
+    "source $VIMRUNTIME/vimrc_example.vim
     source $VIMRUNTIME/mswin.vim
     behave mswin
 endif
@@ -115,6 +115,14 @@ set shiftwidth=4 " number of spaces to use for autoindenting
 
 " old was darkspectrum
 colorscheme mustang 
+
+set background=dark         " Assume a dark background
+
+highlight clear SignColumn " SignColumn should match background for things like vim-gitgutter
+
+set showcmd " Show partial commands in status line and selected characters/lines in visual mode
+
+set scrolloff=3 " Minimum lines to keep above and below cursor
 
 set wildmode=longest,list,full
 set wildmenu
@@ -186,6 +194,8 @@ let mapleader = ","
 set foldlevel=100 " Don't autofold anything (but I can still fold manually)
 set foldopen=block,hor,mark,percent,quickfix,tag " what movements open folds 
 
+set shortmess+=filmnrxoOtT          " Abbrev. of messages (avoids 'hit enter')
+
 " Change Working Directory to that of the current file
 cmap cwd lcd %:p:h
 cmap cd. lcd %:p:h
@@ -199,10 +209,18 @@ nmap <silent> ,sv :so $MYVIMRC<CR>
 
 " Map <Leader>ff to display all lines with keyword under cursor
 " and ask which one to jump to
-nmap <Leader>ff [I:let nr = input("Which one: ")<Bar>exe "normal " . nr ."[\t"<CR>
+" TODO ,ff conficts with vim-easymotion
+"nmap <Leader>ff [I:let nr = input("Which one: ")<Bar>exe "normal " . nr ."[\t"<CR>
 
 " ,f for global git serach for word under the cursor (with highlight)
 "nmap <leader>f :let @/="\\<<C-R><C-W>\\>"<CR>:set hls<CR>:silent Ggrep -w "<C-R><C-W>"<CR>:ccl<CR>:cw<CR><CR>
+
+" Toggle search highlighting
+nmap <silent> <leader>/ :set invhlsearch<CR>
+
+" For when you forget to sudo.. Really Write the file.
+cmap w!! w !sudo tee % >/dev/null
+
 
 " Filetype-specific settings
 autocmd FileType python setlocal colorcolumn=80
