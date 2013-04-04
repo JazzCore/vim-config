@@ -23,7 +23,6 @@ Bundle 'majutsushi/tagbar'
 Bundle 'kien/ctrlp.vim'
 Bundle 'mileszs/ack.vim'
 Bundle 'Raimondi/delimitMate'
-Bundle 'davidhalter/jedi-vim'
 Bundle 'croaker/mustang-vim'
 Bundle 'nvie/vim-flake8'
 Bundle 'alfredodeza/pytest.vim'
@@ -195,11 +194,6 @@ nmap <silent><Leader>tm <Esc>:Pytest method<CR>
 nmap <silent><Leader>tn <Esc>:Pytest next<CR>
 nmap <silent><Leader>tp <Esc>:Pytest previous<CR>
 nmap <silent><Leader>te <Esc>:Pytest error<CR>
-
-" ==================== Jedi ====================
-let g:jedi#auto_initialization = 1
-let g:jedi#popup_on_dot = 0
-let g:jedi#show_function_definition = 0
 
 " ==================== TagBar ====================
 " toggle Tagbar display
