@@ -249,3 +249,5 @@ let g:ycm_complete_in_comments_and_strings = 1
 let g:ycm_collect_identifiers_from_comments_and_strings = 1
 let g:ycm_general_completers = ['ultisnips_completer']
 
+" ==================== NERDTree ====================
+map <F2> :NERDTreeToggle<CR>
