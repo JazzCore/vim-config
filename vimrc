@@ -49,7 +49,10 @@ Bundle 'maxbrunsfeld/vim-yankstack'
 Bundle 'tpope/vim-scriptease'
 Bundle 'ivanov/vim-ipython'
 Bundle 'scrooloose/nerdtree'
-"Bundle 'sgerrand/Conque-Shell'
+Bundle 'sgerrand/Conque-Shell'
+Bundle 'terryma/vim-expand-region'
+Bundle 'spiiph/vim-space'
+Bundle 'airblade/vim-gitgutter'
 
 " Disable menu translation
 set langmenu=none
