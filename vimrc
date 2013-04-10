@@ -105,6 +105,8 @@ set hidden
 nnoremap j gj
 nnoremap k gk
 
+set virtualedit=block
+
 " disable sound on errors
 set noerrorbells
 set novisualbell
@@ -112,6 +114,7 @@ set t_vb=
 set tm=500 
 
 set wrap " don't wrap lines
+set linebreak " don't wrap inside word
 set tabstop=4 " a tab is four spaces
 set softtabstop=4 " when hitting <BS>, pretend like a tab is removed, even if spaces
 set expandtab " expand tabs by default (overloadable per file type later)
