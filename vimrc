@@ -297,11 +297,12 @@ let g:UltiSnipsDontReverseSearchPath=1
 " ==================== YouCompleteMe ====================
 " Disable completion previews with function prototypes, etc.
 "set completeopt=menu
-"let g:ycm_add_preview_to_completeopt = 0
-let g:ycm_autoclose_preview_window_after_completion = 1
+let g:ycm_add_preview_to_completeopt = 0
+"let g:ycm_autoclose_preview_window_after_completion = 1
 let g:ycm_complete_in_comments_and_strings = 1
 let g:ycm_collect_identifiers_from_comments_and_strings = 1
-let g:ycm_general_completers = ['ultisnips_completer']
+" Testing branch 'general'
+let g:ycm_general_completers = ['ultisnips_completer', 'filename_completer']
 
 " ==================== NERDTree ====================
 map <F2> :NERDTreeToggle<CR>
@@ -309,6 +310,6 @@ map <F2> :NERDTreeToggle<CR>
 " ==================== Powerline ====================
 "let g:Powerline_symbols = 'unicode'
 let g:Powerline_symbols="fancy"
-" Temporarily needed for correct powerline work on Windows with
-" latest Vim versions
-let g:powerline_debugging_pyeval=1
+
+" ==================== Vim-Gitgutter ====================
+let g:gitgutter_on_bufenter = 0
