@@ -235,6 +235,16 @@ autocmd FileType python setlocal colorcolumn=80
 " ==================== CtrlP ==================== 
 " funty adds functions definitions mode to CtrlP
 let g:ctrlp_extensions = ['tag', 'funky']
+let g:ctrlp_custom_ignore = {
+    \ 'dir': '\.git$\|\.hg$\|\.svn$',
+    \ 'file': '\.exe$\|\.so$\|\.dll$' }
+
+let g:ctrlp_user_command = {
+    \ 'types': {
+        \ 1: ['.git', 'cd %s && git ls-files . --cached --exclude-standard --others'],
+        \ 2: ['.hg', 'hg --cwd %s locate -I .'],
+    \ }
+\ }
 
 " Execute the tests
 nmap <silent><Leader>tf <Esc>:Pytest file<CR>
