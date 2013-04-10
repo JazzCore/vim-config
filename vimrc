@@ -67,6 +67,7 @@ endif
 " Make them manually
 set backupdir=~/.vim/backup//
 set directory=~/.vim/swap//
+set undodir=~/.vim/undo//
 
 set number
 set autoread " auto read when file is changed from outside
