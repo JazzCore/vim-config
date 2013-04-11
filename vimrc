@@ -18,6 +18,9 @@ Bundle 'tpope/vim-fugitive'
 Bundle 'tpope/vim-surround'
 Bundle 'tpope/vim-endwise'
 Bundle 'tpope/vim-markdown'
+Bundle 'tpope/vim-unimpaired'
+Bundle 'tpope/vim-repeat'
+Bundle 'godlygeek/tabular'
 Bundle 'Valloric/YouCompleteMe'
 Bundle 'scrooloose/nerdcommenter'
 Bundle 'scrooloose/syntastic'
@@ -56,11 +59,14 @@ Bundle 'terryma/vim-expand-region'
 Bundle 'spiiph/vim-space'
 Bundle 'airblade/vim-gitgutter'
 
+filetype on " Enable filetype detection
+filetype indent on " Enable filetype-specific indenting
+filetype plugin on " Enable filetype-specific plugins
+
 " Disable menu translation
 set langmenu=none
 
 if has('win32')
-    "source $VIMRUNTIME/vimrc_example.vim
     source $VIMRUNTIME/mswin.vim
     behave mswin
 endif
@@ -70,97 +76,75 @@ endif
 set backupdir=~/.vim/backup//
 set directory=~/.vim/swap//
 set undodir=~/.vim/undo//
-
-set number
-set autoread " auto read when file is changed from outside
-
-" set default encoding to UTF-8. Needed for powerline
-" this options breaks menu encoding, so we disabling menu
-" translation
-set encoding=utf-8
-
-set fencs=utf-8,cp1251,koi8-r,cp866 " encodings by default
-
-filetype on " Enable filetype detection
-filetype indent on " Enable filetype-specific indenting
-filetype plugin on " Enable filetype-specific plugins
-
-syntax on " syntax highlight
-set hlsearch " search highlighting
-
-set autoindent " auto indentation
-set incsearch " incremental search
-set nobackup " no *~ backup files
-set copyindent " copy the previous indentation on autoindenting
-set ignorecase " ignore case when searching
-set smartcase " ignore case if search pattern is all lowercase,case-sensitive otherwise
-set smarttab " insert tabs on the start of a line according to context
-set backspace=indent,eol,start " allow backspacing over everything in insert mode
-
-" Make sure that unsaved buffers that are to be put in the background are
-" allowed to go in there (ie. the "must save first" error doesn't come up)
-set hidden
-
-" This makes j and k work on "screen lines" instead of on "file lines"; now, when
-" we have a long line that wraps to multiple screen lines, j and k behave as we
-" expect them to.
-nnoremap j gj
-nnoremap k gk
-
-set virtualedit=block
-
-" disable sound on errors
-set noerrorbells
-set novisualbell
-set t_vb=
-set tm=500 
-
-set wrap " don't wrap lines
-set linebreak " don't wrap inside word
-set tabstop=4 " a tab is four spaces
-set softtabstop=4 " when hitting <BS>, pretend like a tab is removed, even if spaces
-set expandtab " expand tabs by default (overloadable per file type later)
-set shiftwidth=4 " number of spaces to use for autoindenting
-
-" old was darkspectrum
-colorscheme mustang 
-
-set background=dark         " Assume a dark background
-
-highlight clear SignColumn " SignColumn should match background for things like vim-gitgutter
-
-set showcmd " Show partial commands in status line and selected characters/lines in visual mode
-
-set scrolloff=3 " Minimum lines to keep above and below cursor
-
-set wildmode=longest,list,full
-set wildmenu
-
-set fileencoding=utf-8
-
-" Make backspace delete lots of things
-set backspace=indent,eol,start
-
-set showmatch " show matched braces 
-
-set history=1000         " remember more commands and search history
-
 set undofile
 set undolevels=2000
 set undoreload=10000
 
+set history=1000                                 " remember more commands and search history
+
+syntax on                                        " syntax highlight
+set number                                       " Enable num lines
+set autoread                                     " auto read when file is changed from outside
+
+set encoding=utf-8                               " this options breaks menu encoding, so we disabling menu translation
+set fileencoding=utf-8
+set fencs=utf-8,cp1251,koi8-r,cp866              " encodings by default
+
+set hlsearch                                     " search highlighting
+
+set autoindent                                   " auto indentation
+set incsearch                                    " incremental search
+set nobackup                                     " no *~ backup files
+set copyindent                                   " copy the previous indentation on autoindenting
+set ignorecase                                   " ignore case when searching
+set smartcase                                    " ignore case if search pattern is all lowercase,case-sensitive otherwise
+set smarttab                                     " insert tabs on the start of a line according to context
+set backspace=indent,eol,start                   " allow backspacing over everything in insert mode
+
+set hidden                                       " put unsaved buffers in the background
+
+set wrap                                         " don't wrap lines
+set linebreak                                    " don't wrap inside word
+set tabstop=4                                    " a tab is four spaces
+set softtabstop=4                                " when hitting <BS>, pretend like a tab is removed, even if spaces
+set expandtab                                    " expand tabs by default (overloadable per file type later)
+set shiftwidth=4                                 " number of spaces to use for autoindenting
+
+set foldlevel=100                                " Don't autofold anything (but I can still fold manually)
+set foldopen=block,hor,mark,percent,quickfix,tag " what movements open folds
+
+set shortmess+=filmnrxoOtT                       " Abbrev. of messages (avoids 'hit enter')
+
+colorscheme mustang
+set background=dark                              " Assume a dark background
+
+highlight clear SignColumn                       " SignColumn should match background for things like vim-gitgutter
+
+set showcmd                                      " Show partial commands in status line and selected characters/lines in visual mode
+
+set scrolloff=3                                  " Minimum lines to keep above and below cursor
+
+set backspace=indent,eol,start                   " Make backspace delete lots of things
+
+set showmatch                                    " show matched braces
+
+set fileformat=unix                              " file mode is unix
+set fileformats=unix,dos,mac                     " detects unix, dos, mac file formats in that order
+
+set mousemodel=popup_setpos                      " Right-click on selection should bring up a menu
+
+set wildmode=longest,list,full
+set wildmenu
 set wildignore=*.swp,*.bak,*.pyc,*.class
 
 set pastetoggle=<F2>
 
-" misc settings
-set fileformat=unix " file mode is unix
-set fileformats=unix,dos,mac " detects unix, dos, mac file formats in that order
+set virtualedit=block
 
-" Right-click on selection should bring up a menu
-set mousemodel=popup_setpos
-
-nnoremap ; :
+set noerrorbells
+set novisualbell
+set t_vb=
+set tm=500
 
 "highlight word under cursor
 "autocmd CursorMoved * silent! exe printf("match Search /\\<%s\\>/", expand('<cword>'))
@@ -186,31 +170,35 @@ endif
 " root.
 set tags=./tags;/
 
+" Set the status line
+set stl=%f\ %m\ %r%{fugitive#statusline()}\ Line:%l/%L[%p%%]\ Col:%v\ Buf:#%n\ [%b][0x%B]
+" tell VIM to always put a status line in, even if there is only one window
+set laststatus=2
+
+" Filetype-specific settings
+autocmd FileType python setlocal colorcolumn=80
+
+" ==================== Mappings ======================
+" System default for mappings is now the "," character
+let mapleader = ","
+
+nnoremap ; :
+
 " Using '<' and '>' in visual mode to shift code by a tab-width left/right by
 " default exits visual mode. With this mapping we remain in visual mode after
 " such an operation.
 vnoremap < <gv
 vnoremap > >gv
 
-" Set the status line
-set stl=%f\ %m\ %r%{fugitive#statusline()}\ Line:%l/%L[%p%%]\ Col:%v\ Buf:#%n\ [%b][0x%B]
-" tell VIM to always put a status line in, even if there is only one window
-set laststatus=2
-
-" System default for mappings is now the "," character
-let mapleader = ","
-
-set foldlevel=100 " Don't autofold anything (but I can still fold manually)
-set foldopen=block,hor,mark,percent,quickfix,tag " what movements open folds 
-
-set shortmess+=filmnrxoOtT          " Abbrev. of messages (avoids 'hit enter')
+nnoremap j gj
+nnoremap k gk
 
 " Change Working Directory to that of the current file
 cmap cwd lcd %:p:h
 cmap cd. lcd %:p:h
 
-" Turn off that stupid highlight search
-nmap <silent> ,n :nohls<CR>
+" Toggle search highlighting
+nmap <silent> <leader>/ :set invhlsearch<CR>
 
 " Edit the vimrc file
 nmap <silent> ,ev :e $MYVIMRC<CR>
@@ -230,9 +218,9 @@ nmap <silent> <leader>/ :set invhlsearch<CR>
 " For when you forget to sudo.. Really Write the file.
 cmap w!! w !sudo tee % >/dev/null
 
-
-" Filetype-specific settings
-autocmd FileType python setlocal colorcolumn=80
+nnoremap <F1> <ESC>
+inoremap <F1> <ESC>
+vnoremap <F1> <ESC>
 
 " ==================== CtrlP ==================== 
 " funty adds functions definitions mode to CtrlP
@@ -248,6 +236,7 @@ let g:ctrlp_user_command = {
     \ }
 \ }
 
+" ==================== PyTest ==================== 
 " Execute the tests
 nmap <silent><Leader>tf <Esc>:Pytest file<CR>
 nmap <silent><Leader>tc <Esc>:Pytest class<CR>
