@@ -103,6 +103,7 @@ set ignorecase                                   " ignore case when searching
 set smartcase                                    " ignore case if search pattern is all lowercase,case-sensitive otherwise
 set smarttab                                     " insert tabs on the start of a line according to context
 set backspace=indent,eol,start                   " allow backspacing over everything in insert mode
+set formatoptions+=r                             " automatic formatting: auto insert current comment leader after enter
 
 set hidden                                       " put unsaved buffers in the background
 
@@ -138,7 +139,7 @@ set mousemodel=popup_setpos                      " Right-click on selection shou
 
 set wildmode=longest,list,full
 set wildmenu
-set wildignore=*.swp,*.bak,*.pyc,*.class
+set wildignore=*.swp,*.bak,*.pyc,*.pyd,*.class
 
 set pastetoggle=<F2>
 
@@ -224,6 +225,20 @@ cmap w!! w !sudo tee % >/dev/null
 nnoremap <F1> <ESC>
 inoremap <F1> <ESC>
 vnoremap <F1> <ESC>
+
+" by default search with 'very no magic'
+nnoremap / /\V
+nnoremap ? ?\V
+
+" easily insert an escaped / on the search prompt
+cnoremap <expr> / getcmdtype() == '/' ? '\/' : '/'
+
+" map control-backspace to delete the previous word in insert mode
+" imap <C-BS> <C-W>
+inoremap <C-BS> <C-W>
+
+" and map control-delete to delete the next word in insert mode
+inoremap <C-Del> <C-O>dw
 
 " ==================== CtrlP ==================== 
 " funty adds functions definitions mode to CtrlP
