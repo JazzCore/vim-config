@@ -51,13 +51,16 @@ Bundle 'michaeljsmith/vim-indent-object'
 Bundle 'sjl/clam.vim'
 Bundle 'suan/vim-instant-markdown'
 Bundle 'maxbrunsfeld/vim-yankstack'
-Bundle 'tpope/vim-scriptease'
 Bundle 'ivanov/vim-ipython'
 Bundle 'scrooloose/nerdtree'
 Bundle 'sgerrand/Conque-Shell'
 Bundle 'terryma/vim-expand-region'
 Bundle 'spiiph/vim-space'
 Bundle 'airblade/vim-gitgutter'
+Bundle 'terryma/vim-multiple-cursors'
+"Bundle 'Shougo/neocomplcache'
+"Bundle 'JazzCore/neocomplcache-ultisnips'
+Bundle 'paradigm/SkyBison'
 
 filetype on " Enable filetype detection
 filetype indent on " Enable filetype-specific indenting
