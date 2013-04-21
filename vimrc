@@ -302,19 +302,17 @@ let g:ackprg = 'ag --nogroup --nocolor --column'
 let g:ultisnips_python_style = "sphinx"
 let g:UltiSnipsSnippetDirectories = ["UltiSnips", "ultisnips-snippets"]
 let g:UltiSnipsDontReverseSearchPath=1
+let g:UltiSnipsExpandTrigger = '<C-CR>'
+let g:UltiSnipsJumpForwardTrigger = '<C-d>'
+let g:UltiSnipsJumpBackwardTrigger = '<C-a>'
 
 " ==================== YouCompleteMe ====================
 " Disable completion previews with function prototypes, etc.
-"set completeopt=menu
+set completeopt=menu
 let g:ycm_add_preview_to_completeopt = 0
 "let g:ycm_autoclose_preview_window_after_completion = 1
 let g:ycm_complete_in_comments_and_strings = 1
 let g:ycm_collect_identifiers_from_comments_and_strings = 1
-" Map correct UltiSnips Tab completion
-au BufEnter * exec "inoremap <silent> " . g:UltiSnipsExpandTrigger . " <C-R>=g:UltiSnips_Complete()<cr>"
-au BufEnter * exec "snoremap <silent> " . g:UltiSnipsExpandTrigger . " <Esc>:call UltiSnips_ExpandSnippetOrJump()<cr>"
-" Testing branch 'general'
-let g:ycm_general_completers = ['ultisnips_completer', 'filename_completer']
 
 " ==================== NERDTree ====================
 map <F2> :NERDTreeToggle<CR>
