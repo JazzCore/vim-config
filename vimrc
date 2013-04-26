@@ -44,23 +44,22 @@ Bundle 'xolox/vim-session'
 Bundle "myusuf3/numbers.vim"
 Bundle "klen/python-mode"
 Bundle 'Decho'
-Bundle 'TaskList.vim'
 Bundle 'bufexplorer.zip'
 " Check it
 Bundle 'michaeljsmith/vim-indent-object'
 Bundle 'sjl/clam.vim'
 Bundle 'suan/vim-instant-markdown'
 Bundle 'maxbrunsfeld/vim-yankstack'
-Bundle 'ivanov/vim-ipython'
 Bundle 'scrooloose/nerdtree'
 Bundle 'sgerrand/Conque-Shell'
 Bundle 'terryma/vim-expand-region'
 Bundle 'spiiph/vim-space'
 Bundle 'airblade/vim-gitgutter'
 Bundle 'terryma/vim-multiple-cursors'
-"Bundle 'Shougo/neocomplcache'
-"Bundle 'JazzCore/neocomplcache-ultisnips'
-Bundle 'paradigm/SkyBison'
+Bundle 'xolox/vim-shell'
+Bundle 'Yggdroot/indentLine'
+"Bundle 'kien/rainbow_parentheses'
+Bundle 'pydave/AsyncCommand'
 
 filetype on " Enable filetype detection
 filetype indent on " Enable filetype-specific indenting
@@ -79,6 +78,19 @@ endif
 set backupdir=~/.vim/backup//
 set directory=~/.vim/swap//
 set undodir=~/.vim/undo//
+
+" Make those folders automatically if they don't already exist.
+if !isdirectory(expand(&undodir))
+    call mkdir(expand(&undodir), "p")
+endif
+if !isdirectory(expand(&backupdir))
+;echo a
+    call mkdir(expand(&backupdir), "p")
+endif
+if !isdirectory(expand(&directory))
+    call mkdir(expand(&directory), "p")
+endif
+
 set undofile
 set undolevels=2000
 set undoreload=10000
@@ -149,6 +161,8 @@ set noerrorbells
 set novisualbell
 set t_vb=
 set tm=500
+
+set splitright
 
 "highlight word under cursor
 "autocmd CursorMoved * silent! exe printf("match Search /\\<%s\\>/", expand('<cword>'))
@@ -226,10 +240,6 @@ nnoremap <F1> <ESC>
 inoremap <F1> <ESC>
 vnoremap <F1> <ESC>
 
-" by default search with 'very no magic'
-nnoremap / /\V
-nnoremap ? ?\V
-
 " easily insert an escaped / on the search prompt
 cnoremap <expr> / getcmdtype() == '/' ? '\/' : '/'
 
@@ -253,6 +263,8 @@ let g:ctrlp_user_command = {
         \ 2: ['.hg', 'hg --cwd %s locate -I .'],
     \ }
 \ }
+
+nnoremap <C-l> :CtrlPMRUFiles<CR>
 
 " ==================== PyTest ==================== 
 " Execute the tests
@@ -323,3 +335,16 @@ let g:Powerline_symbols="fancy"
 
 " ==================== Vim-Gitgutter ====================
 let g:gitgutter_on_bufenter = 0
+
+" ==================== indentLine ====================
+let g:indentLine_char = "│"
+
+" ==================== RainbowParentheses ====================
+"au VimEnter * RainbowParenthesesToggle
+"au Syntax * RainbowParenthesesLoadRound
+"au Syntax * RainbowParenthesesLoadSquare
+"au Syntax * RainbowParenthesesLoadBraces
+
+" ==================== EasyMotion ====================
+" maps: <leader> and f,F,e,E,w,W,ge,gE,j,k,n,N,t,T,b,B
+let g:EasyMotion_leader_key="<Leader>"
