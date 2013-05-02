@@ -20,6 +20,8 @@ Bundle 'tpope/vim-endwise'
 Bundle 'tpope/vim-markdown'
 Bundle 'tpope/vim-unimpaired'
 Bundle 'tpope/vim-repeat'
+" this one sets shiftwidth and tabstop automatically
+Bundle 'tpope/vim-sleuth'
 Bundle 'godlygeek/tabular'
 Bundle 'Valloric/YouCompleteMe'
 Bundle 'scrooloose/nerdcommenter'
@@ -33,10 +35,8 @@ Bundle 'mileszs/ack.vim'
 Bundle 'Raimondi/delimitMate'
 Bundle 'croaker/mustang-vim'
 Bundle 'telamon/vim-color-github'
-Bundle 'nvie/vim-flake8'
 Bundle 'alfredodeza/pytest.vim'
 Bundle 'mbbill/undotree'
-"Bundle 'sjl/Gundo.vim'
 Bundle 'matthias-guenther/hammer.vim'
 Bundle 'Spaceghost/vim-matchit'
 Bundle 'gregsexton/gitv'
@@ -48,7 +48,7 @@ Bundle 'bufexplorer.zip'
 " Check it
 Bundle 'michaeljsmith/vim-indent-object'
 Bundle 'sjl/clam.vim'
-Bundle 'suan/vim-instant-markdown'
+"Bundle 'suan/vim-instant-markdown'
 Bundle 'maxbrunsfeld/vim-yankstack'
 Bundle 'scrooloose/nerdtree'
 Bundle 'sgerrand/Conque-Shell'
@@ -57,7 +57,7 @@ Bundle 'spiiph/vim-space'
 Bundle 'airblade/vim-gitgutter'
 Bundle 'terryma/vim-multiple-cursors'
 Bundle 'xolox/vim-shell'
-Bundle 'Yggdroot/indentLine'
+"Bundle 'Yggdroot/indentLine'
 "Bundle 'kien/rainbow_parentheses'
 Bundle 'pydave/AsyncCommand'
 
@@ -84,7 +84,6 @@ if !isdirectory(expand(&undodir))
     call mkdir(expand(&undodir), "p")
 endif
 if !isdirectory(expand(&backupdir))
-;echo a
     call mkdir(expand(&backupdir), "p")
 endif
 if !isdirectory(expand(&directory))
@@ -164,6 +163,8 @@ set tm=500
 
 set splitright
 
+set nrformats-=octal
+
 "highlight word under cursor
 "autocmd CursorMoved * silent! exe printf("match Search /\\<%s\\>/", expand('<cword>'))
 
@@ -241,7 +242,7 @@ inoremap <F1> <ESC>
 vnoremap <F1> <ESC>
 
 " easily insert an escaped / on the search prompt
-cnoremap <expr> / getcmdtype() == '/' ? '\/' : '/'
+"cnoremap <expr> / getcmdtype() == '/' ? '\/' : '/'
 
 " map control-backspace to delete the previous word in insert mode
 " imap <C-BS> <C-W>
@@ -249,6 +250,12 @@ inoremap <C-BS> <C-W>
 
 " and map control-delete to delete the next word in insert mode
 inoremap <C-Del> <C-O>dw
+
+nnoremap & :&&<CR>
+xnoremap & :&&<CR>
+" Make Y consistent with C and D. See :help Y.
+nnoremap Y y$
+
 
 " ==================== CtrlP ==================== 
 " funty adds functions definitions mode to CtrlP
