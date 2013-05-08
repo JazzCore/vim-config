@@ -13,7 +13,6 @@ source ~/.vim/funcs.vim
 Bundle 'JazzCore/vundle'
 Bundle 'JazzCore/ctrlp-cmatcher'
 Bundle 'JazzCore/ultisnips-snippets'
-Bundle 'SirVer/ultisnips'
 Bundle 'tpope/vim-fugitive'
 Bundle 'tpope/vim-surround'
 Bundle 'tpope/vim-endwise'
@@ -57,9 +56,12 @@ Bundle 'spiiph/vim-space'
 Bundle 'airblade/vim-gitgutter'
 Bundle 'terryma/vim-multiple-cursors'
 Bundle 'xolox/vim-shell'
+Bundle 'SirVer/ultisnips'
 "Bundle 'Yggdroot/indentLine'
 "Bundle 'kien/rainbow_parentheses'
 Bundle 'pydave/AsyncCommand'
+"Bundle 'Shougo/neocomplcache'
+"Bundle 'JazzCore/neocomplcache-ultisnips'
 
 filetype on " Enable filetype detection
 filetype indent on " Enable filetype-specific indenting
@@ -309,6 +311,10 @@ let g:session_autoload = 1
 let g:pymode_doc = 0
 let g:pymode_run = 0
 let g:pymode_lint = 0
+let g:pymode_lint_signs = 1
+"let g:pymode_lint_signs_always_visible = 1
+let g:pymode_lint_onfly = 1
+let g:pymode_lint_cwindow = 1
 let g:pymode_rope = 0
 let g:pymode_folding = 0
 let g:pymode_options = 0
@@ -355,3 +361,8 @@ let g:indentLine_char = "│"
 " ==================== EasyMotion ====================
 " maps: <leader> and f,F,e,E,w,W,ge,gE,j,k,n,N,t,T,b,B
 let g:EasyMotion_leader_key="<Leader>"
+
+let g:jedi#auto_initialization = 1
+let g:jedi#goto_command = "<leader>g"
+let g:jedi#get_definition_command = "<leader>d"
+let g:jedi#use_tabs_not_buffers = 0
