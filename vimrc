@@ -150,6 +150,8 @@ set fileformats=unix,dos,mac                     " detects unix, dos, mac file f
 
 set mousemodel=popup_setpos                      " Right-click on selection should bring up a menu
 
+set list listchars=tab:»·,precedes:<,extends:>   " Make tabs visible. This disables 'wrap'. See g:List_toggle() below
+
 set wildmode=longest,list,full
 set wildmenu
 set wildignore=*.swp,*.bak,*.pyc,*.pyd,*.class
@@ -195,6 +197,17 @@ set tags=./tags;/
 set stl=%f\ %m\ %r%{fugitive#statusline()}\ Line:%l/%L[%p%%]\ Col:%v\ Buf:#%n\ [%b][0x%B]
 " tell VIM to always put a status line in, even if there is only one window
 set laststatus=2
+
+" Highlight trailing whitespace (but not in insert mode)
+highlight ExtraWhitespace ctermbg=red guibg=red
+match ExtraWhitespace /\s\+$/
+augroup extra_whitespace
+  autocmd!
+  autocmd BufWinEnter * match ExtraWhitespace /\s\+$/
+  autocmd InsertEnter * match ExtraWhitespace /\s\+\%#\@<!$/
+  autocmd InsertLeave * match ExtraWhitespace /\s\+$/
+  autocmd BufWinLeave * call clearmatches()
+augroup END
 
 " Filetype-specific settings
 autocmd FileType python setlocal colorcolumn=80
@@ -255,11 +268,16 @@ inoremap <C-Del> <C-O>dw
 
 nnoremap & :&&<CR>
 xnoremap & :&&<CR>
+
 " Make Y consistent with C and D. See :help Y.
 nnoremap Y y$
 
+" Unfortunately, visible tabs require 'list', which makes soft word wrap behave
+" badly. So it should be toggleable.
+noremap <F8> :call g:List_toggle()<CR>
+noremap! <F8> <Esc>:call g:List_toggle()<CR>a
 
-" ==================== CtrlP ==================== 
+" ==================== CtrlP ====================
 " funty adds functions definitions mode to CtrlP
 let g:ctrlp_extensions = ['tag', 'funky']
 let g:ctrlp_custom_ignore = {
@@ -275,7 +293,7 @@ let g:ctrlp_user_command = {
 
 nnoremap <C-l> :CtrlPMRUFiles<CR>
 
-" ==================== PyTest ==================== 
+" ==================== PyTest ====================
 " Execute the tests
 nmap <silent><Leader>tf <Esc>:Pytest file<CR>
 nmap <silent><Leader>tc <Esc>:Pytest class<CR>
@@ -351,12 +369,6 @@ let g:gitgutter_on_bufenter = 0
 
 " ==================== indentLine ====================
 let g:indentLine_char = "│"
-
-" ==================== RainbowParentheses ====================
-"au VimEnter * RainbowParenthesesToggle
-"au Syntax * RainbowParenthesesLoadRound
-"au Syntax * RainbowParenthesesLoadSquare
-"au Syntax * RainbowParenthesesLoadBraces
 
 " ==================== EasyMotion ====================
 " maps: <leader> and f,F,e,E,w,W,ge,gE,j,k,n,N,t,T,b,B

@@ -35,3 +35,14 @@ function! g:StripTrailingWhitespace()
         call cursor(l, c)
     endif
 endfunction
+
+" Telling the user whether "list mode" is on/off is not very informative.
+" Instead, say exactly which feature they gained, and exactly which one they
+" lost, by choosing this mode:
+function! g:List_toggle()
+  set list!
+  let l:list_feat = "Showing Tabs"
+  let l:nolist_feat = "Wrapping Words"
+  echo (&list ? l:list_feat : l:nolist_feat)."! (but not ".
+        \ (&list ? l:nolist_feat : l:list_feat).")"
+endfunction
