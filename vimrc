@@ -13,6 +13,8 @@ source ~/.vim/funcs.vim
 Bundle 'JazzCore/vundle'
 Bundle 'JazzCore/ctrlp-cmatcher'
 Bundle 'JazzCore/ultisnips-snippets'
+Bundle 'JazzCore/mustang-vim'
+Bundle 'JazzCore/vim-hybrid'
 Bundle 'tpope/vim-fugitive'
 Bundle 'tpope/vim-surround'
 Bundle 'tpope/vim-endwise'
@@ -32,7 +34,6 @@ Bundle 'kien/ctrlp.vim'
 Bundle 'tacahiroy/ctrlp-funky'
 Bundle 'mileszs/ack.vim'
 Bundle 'Raimondi/delimitMate'
-Bundle 'croaker/mustang-vim'
 Bundle 'telamon/vim-color-github'
 Bundle 'alfredodeza/pytest.vim'
 Bundle 'mbbill/undotree'
@@ -41,7 +42,7 @@ Bundle 'Spaceghost/vim-matchit'
 Bundle 'gregsexton/gitv'
 Bundle 'xolox/vim-session'
 Bundle "myusuf3/numbers.vim"
-Bundle "klen/python-mode"
+"Bundle "klen/python-mode"
 Bundle 'Decho'
 Bundle 'bufexplorer.zip'
 " Check it
@@ -132,7 +133,8 @@ set foldopen=block,hor,mark,percent,quickfix,tag " what movements open folds
 
 set shortmess+=filmnrxoOtT                       " Abbrev. of messages (avoids 'hit enter')
 
-colorscheme mustang
+"colorscheme mustang
+colorscheme hybrid
 set background=dark                              " Assume a dark background
 
 highlight clear SignColumn                       " SignColumn should match background for things like vim-gitgutter
@@ -194,9 +196,22 @@ endif
 set tags=./tags;/
 
 " Set the status line
-set stl=%f\ %m\ %r%{fugitive#statusline()}\ Line:%l/%L[%p%%]\ Col:%v\ Buf:#%n\ [%b][0x%B]
+set statusline=%<%F " File path
+set statusline+=\ %2*%{&ro?'RO':''}%*%4*%{&mod?'+':''}%<%* " RO and modification flags. %2 - red, %4 - green
+set statusline+=%3*\ %{matchstr(fugitive#statusline(),'(\\zs.*\\ze)')}%* " Fugitive flag. %3 - orange
+set statusline+=%=\ %{&fileformat}\ \| " Remaining items are right-aligned.  File format
+set statusline+=%{&fileencoding}\ \| " Encoding
+set statusline+=%{&filetype}\ \| " filetype
+set statusline+=%p%%\ \| " % of document
+set statusline+=%l:%c\  " Line num and col
+
 " tell VIM to always put a status line in, even if there is only one window
 set laststatus=2
+
+" We need to update this colors to match stl background color of the new theme
+autocmd ColorScheme * silent! call g:SetSTLColors()
+
+call g:SetSTLColors()
 
 " Highlight trailing whitespace (but not in insert mode)
 highlight ExtraWhitespace ctermbg=red guibg=red
@@ -378,3 +393,5 @@ let g:jedi#auto_initialization = 1
 let g:jedi#goto_command = "<leader>g"
 let g:jedi#get_definition_command = "<leader>d"
 let g:jedi#use_tabs_not_buffers = 0
+
+let python_highlight_all=1

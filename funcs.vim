@@ -46,3 +46,16 @@ function! g:List_toggle()
   echo (&list ? l:list_feat : l:nolist_feat)."! (but not ".
         \ (&list ? l:nolist_feat : l:list_feat).")"
 endfunction
+
+function! g:SetSTLColors()
+  " This function set user highlight groups to appropriate guifg color of
+  " themes StatusLine highlight group.
+  redir => stl_hl_group
+  silent hi! StatusLine
+  redir END
+  let fgcolor = matchstr(stl_hl_group,'\vguifg\=\#\zs.{6}\ze')
+  exec 'silent hi! User1 guifg=#'.fgcolor.' guibg=#1d1f21'.' gui=NONE,reverse term=NONE,reverse'
+  exec 'silent hi! User2 guifg=#'.fgcolor.' guibg=#dd3333'.' gui=NONE,reverse term=NONE,reverse'
+  exec 'silent hi! User3 guifg=#'.fgcolor.' guibg=#eea040'.' gui=NONE,reverse term=NONE,reverse'
+  exec 'silent hi! User4 guifg=#'.fgcolor.' guibg=#a0ee40'.' gui=NONE,reverse term=NONE,reverse'
+endfunction
