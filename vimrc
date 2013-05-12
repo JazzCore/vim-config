@@ -15,6 +15,7 @@ Bundle 'JazzCore/ctrlp-cmatcher'
 Bundle 'JazzCore/ultisnips-snippets'
 Bundle 'JazzCore/mustang-vim'
 Bundle 'JazzCore/vim-hybrid'
+Bundle 'JazzCore/vim-python-syntax'
 Bundle 'tpope/vim-fugitive'
 Bundle 'tpope/vim-surround'
 Bundle 'tpope/vim-endwise'
@@ -389,9 +390,6 @@ let g:indentLine_char = "│"
 " maps: <leader> and f,F,e,E,w,W,ge,gE,j,k,n,N,t,T,b,B
 let g:EasyMotion_leader_key="<Leader>"
 
-let g:jedi#auto_initialization = 1
-let g:jedi#goto_command = "<leader>g"
-let g:jedi#get_definition_command = "<leader>d"
-let g:jedi#use_tabs_not_buffers = 0
-
-let python_highlight_all=1
+" ==================== Python-syntax ====================
+" Highlight all python syntax
+let g:python_highlight_all = 1
