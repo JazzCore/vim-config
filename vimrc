@@ -189,16 +189,6 @@ endif
 " root.
 set tags=./tags;/
 
-" Set the status line
-set statusline=%<%F " File path
-set statusline+=\ %2*%{&ro?'RO':''}%*%4*%{&mod?'+':''}%<%* " RO and modification flags. %2 - red, %4 - green
-set statusline+=%3*\ %{matchstr(fugitive#statusline(),'(\\zs.*\\ze)')}%* " Fugitive flag. %3 - orange
-set statusline+=%=\ %{&fileformat}\ \| " Remaining items are right-aligned.  File format
-set statusline+=%{&fileencoding}\ \| " Encoding
-set statusline+=%{&filetype}\ \| " filetype
-set statusline+=%p%%\ \| " % of document
-set statusline+=%l:%c\  " Line num and col
-
 " tell VIM to always put a status line in, even if there is only one window
 set laststatus=2
 
