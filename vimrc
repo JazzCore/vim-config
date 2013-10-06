@@ -366,9 +366,6 @@ let g:Powerline_symbols="fancy"
 " ==================== Vim-Gitgutter ====================
 let g:gitgutter_on_bufenter = 0
 
-" ==================== indentLine ====================
-let g:indentLine_char = "│"
-
 " ==================== EasyMotion ====================
 " maps: <leader> and f,F,e,E,w,W,ge,gE,j,k,n,N,t,T,b,B
 let g:EasyMotion_leader_key="<Leader>"
