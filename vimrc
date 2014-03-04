@@ -4,59 +4,34 @@ filetype off
 
 set rtp+=~/.vim/bundle/vundle/
 call vundle#rc()
-"set rtp+=~/.vim/bundle/powerline/powerline/bindings/vim
-"set rtp+=D:/src/powerline/powerline/bindings/vim
-set rtp+=~/.vim/ycmtest/
 
 source ~/.vim/funcs.vim
 
 Bundle 'JazzCore/vundle'
 Bundle 'JazzCore/ctrlp-cmatcher'
-Bundle 'JazzCore/ultisnips-snippets'
+Bundle 'JazzCore/UltiSnips-Snippets'
 Bundle 'JazzCore/mustang-vim'
 Bundle 'JazzCore/vim-hybrid'
 Bundle 'JazzCore/vim-python-syntax'
+Bundle 'JazzCore/vim-space'
 Bundle 'tpope/vim-fugitive'
 Bundle 'tpope/vim-surround'
 Bundle 'tpope/vim-endwise'
 Bundle 'tpope/vim-markdown'
 Bundle 'tpope/vim-unimpaired'
 Bundle 'tpope/vim-repeat'
+"Bundle 'tpope/vim-vinegar'
 " this one sets shiftwidth and tabstop automatically
 Bundle 'tpope/vim-sleuth'
-Bundle 'godlygeek/tabular'
 Bundle 'Valloric/YouCompleteMe'
 Bundle 'scrooloose/nerdcommenter'
-Bundle 'Lokaltog/vim-easymotion'
-Bundle 'majutsushi/tagbar'
 Bundle 'kien/ctrlp.vim'
 Bundle 'tacahiroy/ctrlp-funky'
-Bundle 'mileszs/ack.vim'
+"Bundle 'mileszs/ack.vim'
 Bundle 'Raimondi/delimitMate'
-Bundle 'telamon/vim-color-github'
-Bundle 'alfredodeza/pytest.vim'
-Bundle 'mbbill/undotree'
-Bundle 'Spaceghost/vim-matchit'
-Bundle 'gregsexton/gitv'
-Bundle 'xolox/vim-session'
 Bundle "myusuf3/numbers.vim"
-Bundle "klen/python-mode"
-Bundle 'Decho'
-Bundle 'bufexplorer.zip'
-" Check it
-Bundle 'michaeljsmith/vim-indent-object'
-"Bundle 'sjl/clam.vim'
-Bundle 'maxbrunsfeld/vim-yankstack'
-Bundle 'scrooloose/nerdtree'
-Bundle 'terryma/vim-expand-region'
-Bundle 'spiiph/vim-space'
-Bundle 'airblade/vim-gitgutter'
 Bundle 'SirVer/ultisnips'
-"Markup
-Bundle 'matthias-guenther/hammer.vim'
-"Bundle 'suan/vim-instant-markdown'
-Bundle 'bling/vim-airline'
-
+Bundle 'maxbrunsfeld/vim-yankstack'
 
 filetype on " Enable filetype detection
 filetype indent on " Enable filetype-specific indenting
@@ -125,7 +100,7 @@ set shiftwidth=4                                 " number of spaces to use for a
 set foldlevel=100                                " Don't autofold anything (but I can still fold manually)
 set foldopen=block,hor,mark,percent,quickfix,tag " what movements open folds
 
-set shortmess+=filmnrxoOtT                       " Abbrev. of messages (avoids 'hit enter')
+set shortmess+=filmnrxoOtTc                       " Abbrev. of messages (avoids 'hit enter'), disable completion messages
 
 "colorscheme mustang
 colorscheme hybrid
@@ -188,6 +163,16 @@ endif
 " that same file in every folder above the folder of the current file, until the
 " root.
 set tags=./tags;/
+
+" Set the status line
+set statusline=%<%F " File path
+set statusline+=\ %2*%{&ro?'RO':''}%*%4*%{&mod?'+':''}%<%* " RO and modification flags. %2 - red, %4 - green
+set statusline+=%3*\ %{matchstr(fugitive#statusline(),'(\\zs.*\\ze)')}%* " Fugitive flag. %3 - orange
+set statusline+=%=\ %{&fileformat}\ \| " Remaining items are right-aligned.  File format
+set statusline+=%{&fileencoding}\ \| " Encoding
+set statusline+=%{&filetype}\ \| " filetype
+set statusline+=%p%%\ \| " % of document
+set statusline+=%l:%c\  " Line num and col
 
 " tell VIM to always put a status line in, even if there is only one window
 set laststatus=2
@@ -277,7 +262,7 @@ noremap <F8> :call g:List_toggle()<CR>
 noremap! <F8> <Esc>:call g:List_toggle()<CR>a
 
 " ==================== CtrlP ====================
-" funty adds functions definitions mode to CtrlP
+" funky adds functions definitions mode to CtrlP
 let g:ctrlp_extensions = ['tag', 'funky']
 let g:ctrlp_custom_ignore = {
     \ 'dir': '\.git$\|\.hg$\|\.svn$',
@@ -292,25 +277,11 @@ let g:ctrlp_user_command = {
 
 nnoremap <C-l> :CtrlPMRUFiles<CR>
 
-" ==================== PyTest ====================
-" Execute the tests
-nmap <silent><Leader>tf <Esc>:Pytest file<CR>
-nmap <silent><Leader>tc <Esc>:Pytest class<CR>
-nmap <silent><Leader>tm <Esc>:Pytest method<CR>
-" cycle through test errors
-nmap <silent><Leader>tn <Esc>:Pytest next<CR>
-nmap <silent><Leader>tp <Esc>:Pytest previous<CR>
-nmap <silent><Leader>te <Esc>:Pytest error<CR>
-
 " ==================== TagBar ====================
 " toggle Tagbar display
 map <F4> :TagbarToggle<CR>
 " autofocus on Tagbar open
 let g:tagbar_autofocus = 1
-
-" ==================== TaskList ====================
-" show pending tasks list
-map <F3> :TaskList<CR>
 
 " ==================== Fugitive ====================
 nnoremap <silent> <leader>gs :Gstatus<CR>
@@ -323,18 +294,6 @@ nnoremap <silent> <leader>gp :Git push<CR>
 " ==================== vim-session ====================
 let g:session_autosave = 1
 let g:session_autoload = 1
-
-" ==================== python-mode ====================
-let g:pymode_doc = 0
-let g:pymode_run = 0
-let g:pymode_lint = 0
-let g:pymode_lint_signs = 1
-"let g:pymode_lint_signs_always_visible = 1
-let g:pymode_lint_onfly = 1
-let g:pymode_lint_cwindow = 1
-let g:pymode_rope = 0
-let g:pymode_folding = 0
-let g:pymode_options = 0
 
 " ==================== Ack.vim ====================
 " Make ack.vim use Ag (silver searcher ) instead of ack
@@ -355,16 +314,6 @@ let g:ycm_add_preview_to_completeopt = 0
 "let g:ycm_autoclose_preview_window_after_completion = 1
 let g:ycm_complete_in_comments_and_strings = 1
 let g:ycm_collect_identifiers_from_comments_and_strings = 1
-
-" ==================== NERDTree ====================
-map <F2> :NERDTreeToggle<CR>
-
-" ==================== Powerline ====================
-"let g:Powerline_symbols = 'unicode'
-let g:Powerline_symbols="fancy"
-
-" ==================== Vim-Gitgutter ====================
-let g:gitgutter_on_bufenter = 0
 
 " ==================== EasyMotion ====================
 " maps: <leader> and f,F,e,E,w,W,ge,gE,j,k,n,N,t,T,b,B
