@@ -140,6 +140,8 @@ set splitright
 
 set nrformats-=octal
 
+set lazyredraw
+
 "highlight word under cursor
 "autocmd CursorMoved * silent! exe printf("match Search /\\<%s\\>/", expand('<cword>'))
 
@@ -208,8 +210,8 @@ nnoremap ; :
 vnoremap < <gv
 vnoremap > >gv
 
-nnoremap j gj
-nnoremap k gk
+nnoremap <silent> j gj
+nnoremap <silent> k gk
 
 " Change Working Directory to that of the current file
 cmap cwd lcd %:p:h
