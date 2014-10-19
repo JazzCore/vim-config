@@ -10,7 +10,6 @@ source ~/.vim/funcs.vim
 Bundle 'JazzCore/vundle'
 Bundle 'JazzCore/ctrlp-cmatcher'
 Bundle 'JazzCore/UltiSnips-Snippets'
-Bundle 'JazzCore/mustang-vim'
 Bundle 'JazzCore/vim-hybrid'
 Bundle 'JazzCore/vim-python-syntax'
 Bundle 'JazzCore/vim-space'
